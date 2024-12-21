@@ -28,6 +28,13 @@
           <td>{{$product->price}}</td>
           <td>{{$product->quantity}}</td>
           <td>{{$product->category_id}}</td>
+          <td>
+            <form action="{{url("pay")}}" method="GET">
+              @csrf
+              <input type="hidden" name="total_price" value={{$product->price}}>
+              <button type="submit" class="btn btn-primary">Check Out</button>
+            </form>
+          </td>
         </tr>
       @endforeach
     </tbody>
@@ -40,12 +47,12 @@
 
   <br>
   <h2>Add New Product</h2>
-  <form id="product-form">
+  <form id="product-form" class="form-group">
       @csrf
-      <input type="text" name="name" placeholder="Name" required><br><br>
-      <input type="number" name="price" placeholder="Price" required><br><br>
-      <input type="number" name="quantity" placeholder="Quantity" required><br><br>
-      <button type="submit">Add Product</button><br><br>
+      <input type="text" name="name" placeholder="Name" required class="form-control"><br><br>
+      <input type="number" name="price" placeholder="Price" required class="form-control"><br><br>
+      <input type="number" name="quantity" placeholder="Quantity" required class="form-control"><br><br>
+      <button type="submit" class="btn btn-primary">Add Product</button><br><br>
   </form>
   <div id="message"></div>
 

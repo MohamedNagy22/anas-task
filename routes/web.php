@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +50,14 @@ Route::middleware(['auth', 'log.request'])->group(function () {
     Route::get('/user-all-products', [ProductController::class, 'allProducts']);            //Responsible for displaying all products for the user
 });
 
+Route::get('/pay', [PaymentController::class, 'showForm'])->name('payment.form');
+Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('payment.process');
+Route::get('/payment-confirmation', [PaymentController::class, 'confirmation'])->name('payment.confirmation');
+
+Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook']);
+
+//Card Number for test
+//4242 4242 4242 4242
 
 //users
 //user@gmail.com
